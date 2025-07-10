@@ -12,12 +12,13 @@ function App() {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
+
     const userMessage = { sender: 'user', text: input };
     setChat(prev => [...prev, userMessage]);
     setInput('');
 
     try {
-      const res = await axios.post('http://localhost:5000/chat', { message: input });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/chat`, { message: input });
       const botMessage = { sender: 'bot', text: res.data.reply };
       setChat(prev => [...prev, botMessage]);
     } catch {
@@ -62,7 +63,6 @@ function App() {
               </div>
               {msg.sender === 'bot' ? (
                 <ReactMarkdown
-                  children={msg.text}
                   components={{
                     code({ node, inline, className, children, ...props }) {
                       return inline ? (
@@ -72,7 +72,9 @@ function App() {
                       );
                     }
                   }}
-                />
+                >
+                  {msg.text}
+                </ReactMarkdown>
               ) : (
                 <div>{msg.text}</div>
               )}

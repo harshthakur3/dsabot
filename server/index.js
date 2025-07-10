@@ -103,7 +103,12 @@ app.post('/chat', async (req, res) => {
   }
 });
 
+
+
+export default app;
+
+/*
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`✅ Gemini persistent chat server running at http://localhost:${PORT}`);
-});
+}); */
