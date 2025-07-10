@@ -10,6 +10,8 @@ function App() {
   const [chat, setChat] = useState([]);
   const chatEndRef = useRef(null);
 
+  const API_URL = 'https://dsabot-new.vercel.app'; // 🔥 Hardcoded API URL
+
   const sendMessage = async () => {
     if (!input.trim()) return;
 
@@ -18,11 +20,12 @@ function App() {
     setInput('');
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/chat`, { message: input });
+      const res = await axios.post(`${API_URL}/chat`, { message: input });
       const botMessage = { sender: 'bot', text: res.data.reply };
       setChat(prev => [...prev, botMessage]);
-    } catch {
-      setChat(prev => [...prev, { sender: 'bot', text: 'Error from API' }]);
+    } catch (err) {
+      console.error(err);
+      setChat(prev => [...prev, { sender: 'bot', text: '❌ Error from API. Please try again.' }]);
     }
   };
 
