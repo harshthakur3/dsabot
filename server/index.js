@@ -103,12 +103,17 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-
+// ✅ Respond to GET /
+app.get('/', (req, res) => {
+  res.send('✅ Gemini DSA Chatbot Backend is Running');
+});
 
 export default app;
 
 /*
+// ✅ Uncomment this block to run locally
 const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`✅ Gemini persistent chat server running at http://localhost:${PORT}`);
-}); */
+  console.log(\`✅ Gemini persistent chat server running at http://localhost:\${PORT}\`);
+});
+*/
